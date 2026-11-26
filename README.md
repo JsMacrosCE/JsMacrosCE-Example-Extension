@@ -19,28 +19,32 @@ Minecraft, Fabric, NeoForge, or full JsMacrosCE mod JAR.
 
 ## Set up your own extension
 
-- **Rename the extension.** Choose your own Java package and a unique extension ID.
-  Update the provider's fully qualified class name in
-  [`META-INF/services/com.jsmacrosce.jsmacros.core.extensions.Extension`](src/main/resources/META-INF/services/com.jsmacrosce.jsmacros.core.extensions.Extension).
-  Keep that service filename as-is. Match `getExtensionName()` to the
-  `jsmacrosce.ext.<id>.json` filename in [`build.gradle.kts`](build.gradle.kts).
-  The ID and the script suffix are independent; this example uses `examplejexl`
-  and `jexl`. Set your project and JAR name in [`settings.gradle.kts`](settings.gradle.kts).
-- **Adding a library to an existing language?** Keep `LibraryExtension`,
-  `getExtensionName()`, `init(Core<?, ?>)`, `getLibraries()`, and the service
-  file. Remove the `LanguageExtension` methods, engine classes and embedded
-  runtime if you don't need them. See
-  [`ExampleGreetingLibrary.java`](src/main/java/com/example/jsmacros/ExampleGreetingLibrary.java)
+- **Rename the extension.**
+  - Choose your own Java package and a unique extension ID.
+  - Update the provider's fully qualified class name in
+  [`META-INF/services/com.jsmacrosce.jsmacros.core.extensions.Extension`](src/main/resources/META-INF/services/com.jsmacrosce.jsmacros.core.extensions.Extension). Keep that service filename as-is.
+  - Match `getExtensionName()` to the `jsmacrosce.ext.<id>.json` filename
+  in [`build.gradle.kts`](build.gradle.kts). The ID and the script suffix
+  are independent; this example uses `examplejexl` and `jexl`.
+  - Set your project and JAR name in [`settings.gradle.kts`](settings.gradle.kts).
+- **Adding a library to an existing language?**
+  - Keep `LibraryExtension`, `getExtensionName()`, `init(Core<?, ?>)`, `getLibraries()`,
+  and the service file.
+  - Remove the `LanguageExtension` methods, engine classes and embedded
+  runtime if you don't need them
+  - See [`ExampleGreetingLibrary.java`](src/main/java/com/example/jsmacros/ExampleGreetingLibrary.java)
   for `@Library("YourGlobal")` and the public `Core` constructor. A `BaseLibrary`
   instance is shared; use `PerExecLibrary` with a public `BaseScriptContext<?>`
   constructor when each script needs its own state. Pick a distinct global name.
-- **Adding a language?** Implement `LanguageExtension` and choose a suffix that
-  doesn't conflict with one users already have. The extension can also implement
-  `LibraryExtension` if it contributes libraries. Replace
+- **Adding a language?**
+  - Implement `LanguageExtension` and choose a suffix that doesn't conflict with
+  one users already have.
+  - The extension can also implement `LibraryExtension` if
+  it contributes libraries. Replace
   [`JexlLanguage.java`](src/main/java/com/example/jsmacros/JexlLanguage.java) and
   [`JexlScriptContext.java`](src/main/java/com/example/jsmacros/JexlScriptContext.java)
-  with your adapter and add its runtime to `embedded` in the build. Keep file
-  and inline evaluation on the same binding path so both receive `retrieveLibs(...)`,
+  with your adapter and add its runtime to `embedded` in the build.
+  - Keep file and inline evaluation on the same binding path so both receive `retrieveLibs(...)`,
   `event`, `file`, and `context`. Inline runs may have no file, and either kind
   of run may have no event.
 
