@@ -1,0 +1,23 @@
+if (file == null || context.getCtx().getFile() != file) {
+    throw 'JsMacrosCE did not pass the expected script file';
+}
+
+var names = ['Ada', 'Grace', 'Linus'];
+var count = 0;
+
+for (var name : names) {
+    var greeting = ExampleGreeting.greet(name);
+    if (greeting != ('Hello, ' + name + '!')) {
+        throw 'Unexpected greeting: ' + greeting;
+    }
+
+    Chat.log(greeting);
+    count += 1;
+}
+
+if (count != 3) {
+    throw 'Expected 3 greetings, got ' + count;
+}
+
+var trigger = event == null ? 'no event' : event.getEventName();
+Chat.log('[PASS] ' + count + ' greetings; trigger: ' + trigger);
