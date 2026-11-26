@@ -1,2 +1,2 @@
 // Gradle uses this name as the base of the output JAR.
-rootProject.name = "jsmacrosce-extension-example"
+rootProject.name = "jsmacrosce-example-extension"

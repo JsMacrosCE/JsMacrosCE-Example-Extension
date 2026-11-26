@@ -8,7 +8,7 @@ It adds [Apache Commons JEXL](https://commons.apache.org/proper/commons-jexl/) a
 
 1. Install **JDK 21** and run `./gradlew build` (`gradlew.bat build` on Windows).
    Gradle downloads the published JsMacrosCE API and JEXL dependencies.
-2. Put `build/libs/jsmacrosce-extension-example-1.0.0.jar` in your Minecraft
+2. Put `build/libs/jsmacrosce-example-extension-1.0.0.jar` in your Minecraft
    instance's `config/jsMacros/Extensions/` and restart the client. The JsMacrosCE
    mod itself belongs in `mods/`. The extension uses the same JAR on Fabric and
    NeoForge and does not need a separate JEXL installation.
