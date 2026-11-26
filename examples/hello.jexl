@@ -6,7 +6,7 @@ var names = ['Ada', 'Grace', 'Linus'];
 var count = 0;
 
 for (var name : names) {
-    var greeting = ExampleGreeting.greet(name);
+    var greeting = ExampleGreetingLibrary.greet(name);
     if (greeting != ('Hello, ' + name + '!')) {
         throw 'Unexpected greeting: ' + greeting;
     }

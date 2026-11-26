@@ -1,38 +1,31 @@
-# JsMacrosCE Extension Example
+# JsMacrosCE Example Extension
 
-A standalone Java template for [JsMacrosCE 2.1.0](https://github.com/JsMacrosCE/JsMacros/releases/tag/v2.1.0).
+A standalone extension template for [JsMacrosCE 2.1.0](https://github.com/JsMacrosCE/JsMacros/releases/tag/v2.1.0).
 It adds [Apache Commons JEXL](https://commons.apache.org/proper/commons-jexl/) as a
 `.jexl` scripting language and provides a small `ExampleGreeting` library.
 
-## Build and try it
+## Build and run it
 
-1. Install **JDK 21** and run `./gradlew build` (`gradlew.bat build` on Windows).
-   Gradle downloads the published JsMacrosCE API and JEXL dependencies.
+1. Install JDK 21 and run `./gradlew build` (`gradlew.bat build` on Windows).
 2. Put `build/libs/jsmacrosce-example-extension-1.0.0.jar` in your Minecraft
-   instance's `config/jsMacros/Extensions/` and restart the client. The JsMacrosCE
-   mod itself belongs in `mods/`. The extension uses the same JAR on Fabric and
-   NeoForge and does not need a separate JEXL installation.
+   instance's `config/jsMacros/Extensions/` and restart the client.
 3. Copy [`hello.jexl`](examples/hello.jexl) into `config/jsMacros/Macros/` and
-   assign it to a key trigger in the JsMacros screen. It prints three greetings
-   and a `[PASS]` line. The optional [`hello.js`](examples/hello.js) demonstrates
-   calling the same library from built-in JavaScript.
+   run it from the JsMacros screen.
 
-`./gradlew jar` only builds the JAR. `./gradlew test` loads that JAR from a
-disposable directory under `build/` using the core included in the published
-API. The tests exercise JEXL and library registration with a stand-in for the
-client-only `Chat` library. They require no Minecraft, Fabric, NeoForge, or
-full JsMacrosCE mod JAR.
+`./gradlew jar` builds the JAR. `./gradlew test` loads that JAR from `build/`
+using the core included in the published API. The tests exercise JEXL and
+library registration with a stand-in for the `Chat` library. They require no
+Minecraft, Fabric, NeoForge, or full JsMacrosCE mod JAR.
 
-## Make it yours
+## Set up your own extension
 
 - **Rename the extension.** Choose your own Java package and a unique extension ID.
   Update the provider's fully qualified class name in
   [`META-INF/services/com.jsmacrosce.jsmacros.core.extensions.Extension`](src/main/resources/META-INF/services/com.jsmacrosce.jsmacros.core.extensions.Extension).
   Keep that service filename as-is. Match `getExtensionName()` to the
   `jsmacrosce.ext.<id>.json` filename in [`build.gradle.kts`](build.gradle.kts).
-  If you keep JEXL, update its package permissions to match. The ID and the
-  script suffix are independent; this example uses `examplejexl` and `jexl`.
-  Set your project and JAR name in [`settings.gradle.kts`](settings.gradle.kts).
+  The ID and the script suffix are independent; this example uses `examplejexl`
+  and `jexl`. Set your project and JAR name in [`settings.gradle.kts`](settings.gradle.kts).
 - **Adding a library to an existing language?** Keep `LibraryExtension`,
   `getExtensionName()`, `init(Core<?, ?>)`, `getLibraries()`, and the service
   file. Remove the `LanguageExtension` methods, engine classes and embedded
@@ -85,16 +78,7 @@ provide a `JavaWrapper` implementation for `JsMacros.on(...)` callbacks. A
 language that supports callbacks needs its own `MethodWrapper` integration to
 manage context lifetime and thread entry.
 
-For larger integrations, see the [built-in Graal adapter and shipped Python runtime](https://github.com/JsMacrosCE/JsMacros/tree/v2.1.0/extension/graal)
-and the [Ruby extension proposal](https://github.com/JsMacrosCE/JsMacros/pull/23).
-
-## Maven dependency
-
-[`build.gradle.kts`](build.gradle.kts) uses
-`com.jsmacrosce.jsmacros:extension-api:2.1.0` from
-[`https://maven.jsmacrosce.com/releases`](https://maven.jsmacrosce.com/releases)
-as a `compileOnly` dependency. The API is shared by Fabric and NeoForge; the
-installed JsMacrosCE mod supplies those classes when the extension runs.
+For larger integrations, see the [built-in Graal adapter and shipped Python runtime](https://github.com/JsMacrosCE/JsMacros/tree/v2.1.0/extension/graal).
 
 ## License
 
